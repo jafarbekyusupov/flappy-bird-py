@@ -1,6 +1,5 @@
 import pygame as pg
 
-
 class Bird:
     def __init__(self, settings):
         self.settings = settings
@@ -20,7 +19,7 @@ class Bird:
 
     def load_frames(self):
         """load & scale bird animation frames"""
-        # bird imgs
+        # bird images -- sprites for 3 states -- UPFLAP | MIDFLAP | DOWNFLAP -- for animation
         bird_downflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-downflap.png').convert_alpha())
         bird_midflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-midflap.png').convert_alpha())
         bird_upflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-upflap.png').convert_alpha())
@@ -63,8 +62,7 @@ class Bird:
         ))
 
     def update(self):
-        """upd bird position & rotation"""
-        # gravity
+        """update bird position & rotation"""
         self.velocity += self.settings.gravity
         self.rect.centery += self.velocity
 
@@ -73,17 +71,17 @@ class Bird:
         self.velocity -= 6
 
     def flap_animation(self):
-        """upd bird flap animation frame"""
+        """update bird flap animation frame"""
         self.bird_index = self.bird_index + 1 if self.bird_index<2 else 0
 
         center = self.rect.center
 
-        self.image = self.bird_frames[self.bird_index] # upd the bird image (switch between sprites to create animation of movement)
+        self.image = self.bird_frames[self.bird_index] # update the bird image  -- switch between sprites to create animation of movement
 
-        self.rect = self.image.get_rect(center=center) # restore center pos
+        self.rect = self.image.get_rect(center=center) # restore center position
 
     def rotate_bird(self):
-        """bird rotation depemding on velocity"""
+        """bird rotation depending on velocity"""
         rotated_bird = pg.transform.rotozoom(self.image, -self.velocity * 3, 1)
         return rotated_bird
 
@@ -93,6 +91,6 @@ class Bird:
         screen.blit(rotated_bird, self.rect)
 
     def reset(self):
-        """reset bird to default pos"""
+        """reset bird to default position"""
         self.velocity = 0
         self.rect.center = (self.settings.width // 5, self.settings.height // 2)
