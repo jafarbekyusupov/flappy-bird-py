@@ -250,7 +250,7 @@ class Game:
             # pause overlay
             if self.game_paused and self.game_active:
                 self.ui.draw_pause_overlay(self.screen)
-                if self.ui.continue_button.draw_button(self.screen): self.game_paused = False
+                if self.ui.resume_button.draw_button(self.screen): self.game_paused = False
 
             # draw UI elements depending on game state
             if not self.game_active:
