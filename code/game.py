@@ -43,7 +43,7 @@ class Game:
         self.score_system = ScoreSystem(settings)
         self.leaderboard_button = LeaderboardButton(settings)
 
-        os.makedirs("../data", exist_ok=True) # ensure data dir exists for leaderboard
+        os.makedirs("data", exist_ok=True) # ensure data dir exists for leaderboard
 
         # set up timers
         pg.time.set_timer(settings.SPAWNPIPE, settings.pipe_spawn_time)
@@ -52,12 +52,12 @@ class Game:
     def load_background_floor(self):
         """load & scale background and floor images"""
         # --------------- Background Image --------------- #
-        self.bg = pg.image.load("../assets/img/background.jpg").convert_alpha()
+        self.bg = pg.image.load("assets/img/background.jpg").convert_alpha()
         self.bg.set_colorkey(self.settings.WHITE)
         self.bg = pg.transform.scale(self.bg, (self.settings.width, self.settings.height))
 
         # --------------- Floor Image --------------- #
-        self.floor = pg.image.load("../assets/img/floor.jpg").convert_alpha()
+        self.floor = pg.image.load("assets/img/floor.jpg").convert_alpha()
         self.floor.set_colorkey(self.settings.WHITE)
         self.floor = pg.transform.scale(self.floor, (self.settings.width, self.settings.height // 8))
 
@@ -355,7 +355,7 @@ class Game:
 
     def get_leaderboard_scores(self):
         """get the leaderboard scores from file or create empty if does not exist"""
-        leaderboard_file = "../data/leaderboard.json"
+        leaderboard_file = "data/leaderboard.json"
         try:
             os.makedirs(os.path.dirname(leaderboard_file), exist_ok=True) # ensure directory exists | also done in main.py
 
