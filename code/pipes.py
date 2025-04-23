@@ -1,7 +1,6 @@
 import pygame as pg
 import random
 
-
 class PipeManager:
     def __init__(self, settings):
         self.settings = settings
@@ -10,7 +9,7 @@ class PipeManager:
         self.pipes = []
         self.passed_pipes = []
 
-        # load imgs
+        # load images
         self.load_pipe_image()
 
         # calc pipe heights based on screen.size
@@ -22,24 +21,24 @@ class PipeManager:
 
     def load_pipe_image(self):
         """laod & SCALE pipe img"""
-        self.pipe_image = pg.image.load("../assets/img/pipe3.png").convert_alpha()
+        self.pipe_image = pg.image.load("../assets/img/pipe.png").convert_alpha()
         self.pipe_image.set_colorkey(self.settings.WHITE)
         self.pipe_image = pg.transform.scale2x(self.pipe_image)
 
     def resize(self, settings):
-        """update pipe manager if new sc size selected"""
+        """update pipe manager if new Screen Size selected"""
         self.settings = settings
 
-        self.load_pipe_image() # REload pipe img
+        self.load_pipe_image() # Reload Pipe Image
 
-        # heights upd
+        # heights updated
         self.pipe_heights = [
             settings.height * 0.6,
             settings.height * 0.5,
             settings.height * 0.7
         ]
 
-    def spawn_pipe(self): # generate new pair of pipes - later to make em top and bottmo
+    def spawn_pipe(self): # generate new pair of pipes - later to make em top and bottom
         self.pipes.extend(self.create_pipe_pair())
 
     def create_pipe_pair(self):
@@ -66,7 +65,7 @@ class PipeManager:
         self.move_pipes(); self.remove_offscreen_pipes()
 
     def move_pipes(self):
-        """Move pipes across the screen"""
+        """moving pipes from right to left -- towards the bird (player)"""
         speed_factor = self.settings.scale_factor
         for pipe in self.pipes: pipe.centerx -= 5 * speed_factor
 
@@ -91,7 +90,7 @@ class PipeManager:
         return False
 
     def check_collision(self, bird_rect):
-        """check if bird coll-d with any pipe"""
+        """check if bird collided with any pipe"""
         for pipe in self.pipes:
             if bird_rect.colliderect(pipe): return True
         return False
@@ -101,7 +100,7 @@ class PipeManager:
         for pipe in self.pipes:
             if pipe.bottom >= self.settings.height: # bottom pipe
                 screen.blit(pg.transform.scale(self.pipe_image, (pipe.width, pipe.height)), pipe)
-            else: # top -- flipped img
+            else: # top -- flipped image
                 flip_pipe = pg.transform.flip(
                     pg.transform.scale(self.pipe_image, (pipe.width, pipe.height)),
                     False, True
