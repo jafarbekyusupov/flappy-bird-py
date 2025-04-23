@@ -21,7 +21,7 @@ class PipeManager:
 
     def load_pipe_image(self):
         """laod & SCALE pipe img"""
-        self.pipe_image = pg.image.load("../assets/img/pipe.png").convert_alpha()
+        self.pipe_image = pg.image.load("assets/img/pipe.png").convert_alpha()
         self.pipe_image.set_colorkey(self.settings.WHITE)
         self.pipe_image = pg.transform.scale2x(self.pipe_image)
 
