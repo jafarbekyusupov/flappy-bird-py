@@ -2,9 +2,6 @@ import pygame as pg
 import json
 import os
 
-""" --------// LDB in comments means Leaderboard
-    --------// i was just lazy typing it out over and over again """ 
-
 class ScoreMessage:
     def __init__(self, x, y, lifetime=60):
         self.x = x
@@ -33,7 +30,7 @@ class ScoreSystem:
 
         self.leaderboard_file = "../data/leaderboard.json"  # leaderboard file
 
-        top_scores = self.get_top_scores(1)  # top score from LDB
+        top_scores = self.get_top_scores(1)  # top score from leaderboard
         if top_scores: self.high_score = top_scores[0]["score"]
 
         # username input for leaderboard
@@ -72,7 +69,7 @@ class ScoreSystem:
     def draw_score(self, screen, game_state):
         """score display based on game state"""
         if game_state == 'a_game':
-            # half transp score bubble
+            # half transparent score bubble
             score_text = str(int(self.score))
             score_surface = self.score_display_font.render(score_text, True, (255, 255, 255))
 
@@ -85,18 +82,18 @@ class ScoreSystem:
             bubble_x = (self.settings.width - bubble_width) // 2
             bubble_y = 20 * self.settings.scale_factor
 
-            # bubble bg
+            # bubble background
             bubble_rect = pg.Rect(bubble_x, bubble_y, bubble_width, bubble_height)
             pg.draw.rect(screen, (0, 0, 0, 128), bubble_rect, border_radius=int(bubble_height // 2))
             pg.draw.rect(screen, (255, 200, 0), bubble_rect, width=3, border_radius=int(bubble_height // 2))
 
-            # score txt
+            # score text
             text_x = bubble_x + (bubble_width - score_surface.get_width()) // 2
             text_y = bubble_y + (bubble_height - score_surface.get_height()) // 2
             screen.blit(score_surface, (text_x, text_y))
 
         elif game_state == 'game_over':
-            # half transparent overlay for txt visibility
+            # half transparent overlay for text visibility
             overlay = pg.Surface((self.settings.width, self.settings.height), pg.SRCALPHA)
             overlay.fill((0, 0, 0, 160))
             screen.blit(overlay, (0, 0))
@@ -132,7 +129,7 @@ class ScoreSystem:
             screen.blit(top_score_shadow, (top_score_rect.x + 2, top_score_rect.y + 2))
             screen.blit(top_score_surface, top_score_rect)
 
-            # display name input if score is high enough for LDB
+            # display name input if score is high enough for leaderboard
             is_ts = self.isTopScore(self.score) # is top score
             if self.show_name_input and is_ts: self.draw_name_input(screen)
 
@@ -142,11 +139,11 @@ class ScoreSystem:
         input_width = 400 * self.settings.scale_factor
         input_height = 50 * self.settings.scale_factor
         input_x = (self.settings.width - input_width) // 2
-        input_y = self.settings.height // 3 + 75  # pos-ed higher to make room for btns below
+        input_y = self.settings.height // 3 + 75  # positioned higher to make room for buttons below
 
         input_rect = pg.Rect(input_x, input_y, input_width, input_height)
 
-        # instruct txt 
+        # instruct text 
         label_text = "Enter your name for the leaderboard:"
         label_surface = self.input_font.render(label_text, True, (255, 255, 255))
         label_rect = label_surface.get_rect(center=(self.settings.width // 2, input_y - 25))
@@ -171,7 +168,7 @@ class ScoreSystem:
                 2
             )
 
-        # -------------- SUBMIT BTN btn -------------- #
+        # -------------- SUBMIT BUTTON -------------- #
         submit_width = 150 * self.settings.scale_factor
         submit_height = 40 * self.settings.scale_factor
         submit_x = (self.settings.width - submit_width) // 2
@@ -179,11 +176,11 @@ class ScoreSystem:
 
         submit_rect = pg.Rect(submit_x, submit_y, submit_width, submit_height)
 
-        # btn rect
+        # button rect
         pg.draw.rect(screen, (0, 150, 0), submit_rect, border_radius=int(submit_height // 4))
         pg.draw.rect(screen, (0, 200, 0), submit_rect, 3, border_radius=int(submit_height // 4))
 
-        # btn text
+        # button text
         submit_text = self.input_font.render("Submit", True, (255, 255, 255))
         submit_text_rect = submit_text.get_rect(center=submit_rect.center)
         screen.blit(submit_text, submit_text_rect)
@@ -211,7 +208,7 @@ class ScoreSystem:
             # if clicked on input box
             self.active_input = True if input_rect.collidepoint(event.pos) else False
 
-            # submit btn clicked
+            # submit button clicked
             if submit_rect.collidepoint(event.pos):
                 self.submit_score()
                 return "submitted"
@@ -246,7 +243,7 @@ class ScoreSystem:
                 with open(self.leaderboard_file, 'r') as file:
                     return json.load(file)
             else:
-                # create default ldb
+                # create default leaderboard
                 default_leaderboard = {"scores": []}
                 with open(self.leaderboard_file, 'w') as file:
                     json.dump(default_leaderboard, file)
@@ -267,10 +264,9 @@ class ScoreSystem:
         """add a new score to leaderboard"""
         if not name.strip(): name = "Player"
 
-        leaderboard = self.load_leaderboard()  # load cur ldb
+        leaderboard = self.load_leaderboard()  # load current leaderboard
 
-        # Make sure ldb has scores property // DEBUGGGGGGINGGGGGG UHHHHHHHHHHHHHHHH
-        if "scores" not in leaderboard:
+        if "scores" not in leaderboard: # make sure leaderboard has scores property // reason for leaderboard display problem
             leaderboard["scores"] = []
 
         new_entry = {
@@ -280,7 +276,7 @@ class ScoreSystem:
 
         leaderboard["scores"].append(new_entry)
 
-        # sort by score DESC order
+        # sort by score DESCENDING order -- from highest to lowest
         leaderboard["scores"] = sorted(
             leaderboard["scores"],
             key=lambda x: x["score"],
@@ -313,13 +309,13 @@ class ScoreSystem:
         """update max score if current score is greater"""
         if self.score > self.high_score: self.high_score = self.score
 
-        # if qualifies for leaderboard AND its NOT ZERO (in case leaderboard is empty)
+        # if qualifies for leaderboard AND its NOT ZERO -- in case leaderboard is empty
         if self.isTopScore(self.score) and self.score > 0:
             self.show_name_input = True
             self.active_input = True
 
     def reset_score(self):
-        """reset score & score msgs"""
+        """reset score & score messages"""
         self.score = 0
         self.score_messages.clear()
         self.show_name_input = False
