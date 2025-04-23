@@ -363,9 +363,9 @@ class Game:
                 with open(leaderboard_file, 'r') as file:
                     data = json.load(file)
                     if "scores" in data:
-                        return data["scores"]
+                        return data["scores"][:7] # limit to top 7 scores // fixed bug cuz even tho in score_system i limited score num to 7 i forgot to do so in display func here
                     elif "leaderboard" in data:
-                        return data["leaderboard"]
+                        return data["leaderboard"][:7] # limit to top 7 scores
                     else:
                         return []
             else:
