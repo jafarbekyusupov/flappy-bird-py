@@ -47,7 +47,7 @@ _• If your score is high enough, an input box will appear — enter your name 
    pip install -r requirements.txt # On Windows if pip is not recognized:  try py -m pip install -r requirements.txt
 4. **🕹️ Run the game:**
    ```bash
-   python main.py
+   python code/main.py
 
 ## **🏗️ Project Structure**
   ```
