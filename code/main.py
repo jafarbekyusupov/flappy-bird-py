@@ -10,7 +10,7 @@ def main():
 
     settings = Settings() # create game settings
 
-    os.makedirs("data", exist_ok=True) #make sure data dir exists
+    os.makedirs("data", exist_ok=True) # make sure data dir exists
     
     game = Game(settings)  # create obj game and run it
     game.run()
