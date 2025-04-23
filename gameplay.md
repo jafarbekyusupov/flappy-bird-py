@@ -7,29 +7,35 @@
 
 ## 🎮 Start Screen
 
-<img src="screenshots/game-Start-Screen.png" alt="Start Screen" width="350"/>
+<img src="gameplay/game-Start-Screen.png" alt="Start Screen" width="350"/>
 
 ---
 
 ## 🏁 Get Ready Screen
 
-<img src="screenshots/game-getReady-screen.png" alt="Get Ready Screen" width="350"/>
+<img src="gameplay/game-getReady-screen.png" alt="Get Ready Screen" width="350"/>
 
 ---
 
 ## ⏸️ Pause Screen
 
-<img src="screenshots/game-Pause-screen.png" alt="Play Screen" width="350"/>
+<img src="gameplay/game-Pause-screen.png" alt="Play Screen" width="350"/>
 
 ---
 
 ## ☠️ Game Over Screen
 
-<img src="screenshots/gameOver-screen.png" alt="Game Over Screen" width="350"/>
+<img src="gameplay/gameOver-screen.png" alt="Game Over Screen" width="350"/>
 
 ---
 
-## 🎥 [Gameplay Video (YouTube)](https://youtube.com/shorts/cnlitacR0Uw)
+## 🏆 LeaderBoard -- Accessible via button on Start Screen
+
+<img src="gameplay/game-Leaderboard.png" alt="Game Over Screen" width="350"/>
+
+---
+
+## 🎥 [Gameplay Video (YouTube)](https://youtube.com/shorts/EqGxaboTEXA)
 
 ### Watch the full demo on YouTube
 
@@ -40,11 +46,11 @@
 > #### If you're viewing this locally, you can watch the video below or download it.
 
 <video width="480" controls>
-  <source src="screenshots/gameplay.mp4" type="video/mp4">
+  <source src="gameplay/gameplay.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-[📥 Download Video](screenshots/gameplay.mp4)
+[📥 Download Video](gameplay/gameplay.mp4)
 
 ---
 
