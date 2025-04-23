@@ -28,7 +28,7 @@ class ScoreSystem:
         self.high_score = 0
         self.score_messages = []
 
-        self.leaderboard_file = "../data/leaderboard.json"  # leaderboard file
+        self.leaderboard_file = "data/leaderboard.json"  # leaderboard file
 
         top_scores = self.get_top_scores(1)  # top score from leaderboard
         if top_scores: self.high_score = top_scores[0]["score"]
