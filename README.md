@@ -6,7 +6,7 @@
 
 _• Smooth animations and physics (Bird wing movements using sprites)_
 
-_• Score tracking with high score system_
+_• **Score tracking system** and **Leaderboard** implementation for Top Scores, storing data in .json format_
 
 _• Pause/resume functionality_
 
@@ -25,6 +25,8 @@ _• The game ends when you hit a pipe or the ground_
 
 _• After game over, click "Play Again" to restart_
 
+_• If your score is high enough, an input box will appear — enter your name to be featured on the leaderboard_
+
 ## 📜 Gameplay Showcase
 
 > ### [Click here to view the Gameplay showcase](gameplay.md)
@@ -39,7 +41,7 @@ _• After game over, click "Play Again" to restart_
 2. **🐍 Create a virtual environment and activate it:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   source venv/bin/activate  # On Windows use `venv/Scripts/activate`
 3. **📦 Install dependencies:**
    ```bash
    pip install -r requirements.txt # On Windows if pip is not recognized:  try py -m pip install -r requirements.txt
@@ -58,20 +60,21 @@ flappy-bird/
 │ ├── pipes.py‎‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎   # Manages pipe creation, movement and collision                                                
 │ ├── interface.py‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎   # Handles UI elements including buttons and overlays                                                            
 │ ├── score_system.py‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎    # Manages score tracking and display                                                                       
-│ ├── leaderboard.py‎‎             # LeaderboardButton button for Main Menu Screen to view leaderboard stored in .json file
+│ ├── leaderboard.py‎‎             # LeaderboardButton button for Main Menu Screen to view leaderboard
 │ 
 ├── testing/                 
 │ ├── unit-tst.py                # Unit testing
 │‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎                                                
 ├── assets/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  # Game assets folder                                                                                                                                                
-│ ├── img/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎     # Image assets                                                                                                          
-│ └── sounds/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  # Sound effects -- in process                                                               
+│ ├── img/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎     # Image assets                                                              
 │
-├── screenshots/
+├── gameplay/
+│ ├── gameplay.mp4                   # Gameplay Demo in Video Format
 │ ├── game-Start-Screen.png          # Game Start Screen
 | ├── game-getReady-screen.png       # Get ready Screen with 3 second countdown 
 | ├── game-Pause-screen.png          # Game Pause Screen
 | ├── gameOver-screen.png            # Game Over Screen
+│ ├── game-Leaderboard.png           # Leaderboard
 │
 ├── requirements.txt
 ├── gameplay.md                  # Screenshots and video showcasing the Gameplay
