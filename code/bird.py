@@ -20,9 +20,9 @@ class Bird:
     def load_frames(self):
         """load & scale bird animation frames"""
         # bird images -- sprites for 3 states -- UPFLAP | MIDFLAP | DOWNFLAP -- for animation
-        bird_downflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-downflap.png').convert_alpha())
-        bird_midflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-midflap.png').convert_alpha())
-        bird_upflap_original = pg.transform.scale2x(pg.image.load('../assets/img/bird-sprites/bird-upflap.png').convert_alpha())
+        bird_downflap_original = pg.transform.scale2x(pg.image.load('assets/img/bird-sprites/bird-downflap.png').convert_alpha())
+        bird_midflap_original = pg.transform.scale2x(pg.image.load('assets/img/bird-sprites/bird-midflap.png').convert_alpha())
+        bird_upflap_original = pg.transform.scale2x(pg.image.load('assets/img/bird-sprites/bird-upflap.png').convert_alpha())
 
         # scale based on screen size
         scale_factor = self.settings.width / self.original_width
