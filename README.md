@@ -58,7 +58,8 @@ flappy-bird/
 │ ├── pipes.py‎‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎   # Manages pipe creation, movement and collision                                                
 │ ├── interface.py‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎   # Handles UI elements including buttons and overlays                                                            
 │ ├── score_system.py‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎    # Manages score tracking and display                                                                       
-│‎
+│ ├── leaderboard.py‎‎             # LeaderboardButton button for Main Menu Screen to view leaderboard stored in .json file
+│ 
 ├── testing/                 
 │ ├── unit-tst.py                # Unit testing
 │‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎                                                
@@ -68,10 +69,10 @@ flappy-bird/
 │ └── sounds/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  # Sound effects                                                                
 │
 ├── screenshots/
-│ ├── game-Start-Screen.png      # Game Start Screen
-| ├── game-getReady-screen.png   # Get ready Screen with 3 second countdown 
-| ├── game-Pause-screen          # Game Pause Screen
-| ├── gameOver-screen            # Game Over Screen
+│ ├── game-Start-Screen.png          # Game Start Screen
+| ├── game-getReady-screen.png       # Get ready Screen with 3 second countdown 
+| ├── game-Pause-screen.png          # Game Pause Screen
+| ├── gameOver-screen.png            # Game Over Screen
 │
 ├── requirements.txt
 ├── gameplay.md                  # Screenshots and video showcasing the Gameplay
