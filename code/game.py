@@ -29,14 +29,14 @@ class Game:
         self.countdown_start_time = 0
         self.countdown_duration = 3  # seconds
 
-        # leaderboard state / display state
+        # leaderboard display state
         self.show_leaderboard = False
 
         self.floor_pos = 0
 
         self.load_background_floor()
 
-        # game components - bird, pipes, interface (buttons, texts), scores
+        # game components - Bird | Pipes | Interface (UI,Button) | ScoreSystem | LeaderboardButton
         self.bird = Bird(settings)
         self.pipe_manager = PipeManager(settings)
         self.ui = UI(settings)
@@ -51,10 +51,12 @@ class Game:
 
     def load_background_floor(self):
         """load & scale background and floor images"""
-        self.bg = pg.image.load("../assets/img/bg1f.jpg").convert_alpha()
+        # --------------- Background Image --------------- #
+        self.bg = pg.image.load("../assets/img/background.jpg").convert_alpha()
         self.bg.set_colorkey(self.settings.WHITE)
         self.bg = pg.transform.scale(self.bg, (self.settings.width, self.settings.height))
 
+        # --------------- Floor Image --------------- #
         self.floor = pg.image.load("../assets/img/floor.jpg").convert_alpha()
         self.floor.set_colorkey(self.settings.WHITE)
         self.floor = pg.transform.scale(self.floor, (self.settings.width, self.settings.height // 8))
@@ -128,7 +130,7 @@ class Game:
         for event in pg.event.get():
             if event.type == pg.QUIT: pg.quit(); sys.exit()
 
-            # pause with P key / only when game is active
+            # pause with P key -- only when game is active
             if event.type == pg.KEYDOWN and event.key == pg.K_p and self.game_active and not self.countdown_active:
                 self.game_paused = not self.game_paused
 
@@ -139,7 +141,7 @@ class Game:
             if event.type == self.settings.BIRDFLAP and not self.game_paused:
                 self.bird.flap_animation()
 
-            # double click detection for pausing (only when game is active)
+            # double click detection for pausing -- only when game IS ACTIVE
             if event.type == pg.MOUSEBUTTONDOWN and self.game_active and not self.countdown_active:
                 if event.button == 1:  # left mouse button
                     click_interval = cur_time - self.last_click_time
@@ -154,7 +156,7 @@ class Game:
                 if result == "submitted":
                     self.score_system.show_name_input = False # clean input box after submission
 
-        # handle space key for bird jumping // only when game is active
+        # handle space key for bird jumping -- only when game is active
         keys = pg.key.get_pressed()
         if keys[pg.K_SPACE] and self.game_active and not self.game_paused and not self.countdown_active:
             self.bird.jump()
@@ -168,9 +170,8 @@ class Game:
         # move floor | always update even in menus for animation
         speedf = self.settings.scale_factor # speed factor 
         self.floor_pos -= int(1 * speedf)
-        if self.floor_pos <= -self.settings.width: self.floor_pos = 0 # reset, so while it seems like it endlessly moving forward its actually going to the right until resets, but texture of floor makes it seems unnoticeable
-
-        # skip other updates if game is not active or is paused
+        if self.floor_pos <= -self.settings.width: self.floor_pos = 0
+        # skip other updates if game IS NOT ACTIVE or IS PAUSED
         if not self.game_active or self.game_paused: return
 
         # update pipes
@@ -216,7 +217,7 @@ class Game:
 
         self.draw_floor()
 
-        # -------------- start menu -------------- #
+        # -------------- START MENU -------------- #
         if self.in_start_menu and not self.countdown_active:
             self.ui.draw_start_menu(self.screen)
             
@@ -224,21 +225,20 @@ class Game:
             if self.leaderboard_button.draw_button(self.screen):
                 self.show_leaderboard = not self.show_leaderboard
 
-            # display leaderboard if needed
+            
             if self.show_leaderboard:
                 self.draw_leaderboard(self.screen)
-            elif self.ui.start_button.draw_button(self.screen):
-                # display only start button if leaderboard is not shown
+            elif self.ui.start_button.draw_button(self.screen): # display only start button if leaderboard is not shown
                 self.start_countdown()
 
-        # -------------- countdown -------------- #
+        # -------------- COUNTDOWN -------------- #
         elif self.countdown_active: # 3..2..1
             self.bird.draw(self.screen) # bird during countdown
             self.draw_countdown() # countdown itself
 
-        # -------------- game in progress or over -------------- #
-        else: # game is in progress or game over
-            self.pipe_manager.draw(self.screen) # drawing pipes
+        # -------------- Game IN PROGRESS or OVER -------------- #
+        else:
+            self.pipe_manager.draw(self.screen) # displaying pipes
 
             if self.game_active: self.bird.draw(self.screen) # bird if game is active
 
@@ -252,22 +252,17 @@ class Game:
                 self.ui.draw_pause_overlay(self.screen)
                 if self.ui.continue_button.draw_button(self.screen): self.game_paused = False
 
-            # draw ui elements depending on game state
+            # draw UI elements depending on game state
             if not self.game_active:
-                if not self.score_system.show_name_input:
-                    # standard game over buttons
-                    if self.ui.again_button.draw_button(self.screen):
-                        self.restart_game()
-                    if self.ui.quit_button.draw_button(self.screen):
-                        pg.quit();
-                        sys.exit()
-                    if self.ui.menu_button.draw_button(self.screen):
-                        self.return_to_menu()
-                else:
-                    # when showing name input, draw buttons below
-                    self.draw_game_over_buttons_below_input(self.screen)
+                if self.ui.again_button.draw_button(self.screen):
+                    self.restart_game()
+                if self.ui.quit_button.draw_button(self.screen):
+                    pg.quit();
+                    sys.exit()
+                if self.ui.menu_button.draw_button(self.screen):
+                    self.return_to_menu()
 
-        # size button always available except countdown screen
+        # size button always available except COUNTDOWN SCREEN
         if not self.countdown_active:
             if self.ui.size_button.draw_button(self.screen):
                 self.show_size_menu = not self.show_size_menu
@@ -282,38 +277,6 @@ class Game:
                 if self.ui.large_button.draw_button(self.screen):
                     self.resize_game("large")
                     self.show_size_menu = False
-
-    def draw_game_over_buttons_below_input(self, screen):
-        """draw game over buttons below the name input field"""
-        # button positions controlled to ensure they are below the input
-        input_bottom_y = self.settings.height // 3 + 20 + 50 * self.settings.scale_factor + 20
-
-        # create temporary buttons positioned below the input field
-        button_width = int(180 * self.settings.scale_factor)
-        button_height = int(70 * self.settings.scale_factor)
-
-        again_x = (self.settings.width - button_width) // 4
-        again_y = input_bottom_y + 50
-        temp_again_button = Button(again_x, again_y, 'Play Again', button_width, button_height, (0, 180, 50))
-
-        quit_x = again_x + button_width + 50
-        quit_y = again_y
-        temp_quit_button = Button(quit_x, quit_y, 'Quit', button_width, button_height, (180, 50, 50))
-
-        menu_width = int(350 * self.settings.scale_factor)
-        menu_height = int(80 * self.settings.scale_factor)
-        menu_x = (self.settings.width - menu_width) // 2
-        menu_y = again_y + button_height + 30
-        temp_menu_button = Button(menu_x, menu_y, 'Main Menu', menu_width, menu_height, (255, 165, 0))
-
-        # draw and check the temporary buttons
-        if temp_again_button.draw_button(screen):
-            self.restart_game()
-        if temp_quit_button.draw_button(screen):
-            pg.quit()
-            sys.exit()
-        if temp_menu_button.draw_button(screen):
-            self.return_to_menu()
 
     def draw_leaderboard(self, screen):
         """draw the leaderboard screen with simplified layout - no dates"""
@@ -332,16 +295,15 @@ class Game:
         bg_rect = leaderboard_bg.get_rect(center=(self.settings.width // 2, self.settings.height // 2))
         screen.blit(leaderboard_bg, bg_rect)
 
-        # draw the title
+        # display the title
         title_font = pg.font.SysFont('Impact', int(50 * self.settings.scale_factor))
         title_text = title_font.render("LEADERBOARD", True, (255, 215, 0))
         title_rect = title_text.get_rect(center=(self.settings.width // 2, bg_rect.top + 50))
         screen.blit(title_text, title_rect)
 
-        # get top scores
-        top_scores = self.get_leaderboard_scores()
+        top_scores = self.get_leaderboard_scores() # get top scores
 
-        # draw headers (no date column)
+        # draw headers -- | RANK | NAME | SCORE |
         header_y = title_rect.bottom + 30
         column_width = (leaderboard_width - 60) / 3
         header_font = pg.font.SysFont('Arial', int(30 * self.settings.scale_factor))
@@ -366,50 +328,49 @@ class Game:
         # draw each score entry
         start_y = header_y + 60
         for i, entry in enumerate(top_scores):
-            # alternate row colors for readability
             row_color = (60, 60, 80) if i % 2 == 0 else (80, 80, 100)
             row_rect = pg.Rect(bg_rect.left + 30, start_y, bg_rect.width - 60, 40)
             pg.draw.rect(screen, row_color, row_rect, border_radius=5)
 
-            # draw rank
             rank_text = header_font.render(f"{i + 1}", True, (255, 255, 255))
             screen.blit(rank_text, (bg_rect.left + column_width / 2 - rank_text.get_width() / 2, start_y + 5))
 
-            # draw name
             name_text = header_font.render(entry["name"], True, (255, 255, 255))
             screen.blit(name_text, (bg_rect.left + column_width * 1.5 - name_text.get_width() / 2, start_y + 5))
-
-            # draw score
+            
             score_text = header_font.render(str(entry["score"]), True, (255, 215, 0))
             screen.blit(score_text, (bg_rect.left + column_width * 2.5 - score_text.get_width() / 2, start_y + 5))
 
             start_y += 50
-
-        # draw close button
+        # -------- CLOSE BUTTON -------- #
         close_rect = pg.Rect(bg_rect.centerx - 75, bg_rect.bottom - 60, 150, 40)
         pg.draw.rect(screen, (180, 50, 50), close_rect, border_radius=10)
         close_text = header_font.render("Close", True, (255, 255, 255))
         close_text_rect = close_text.get_rect(center=close_rect.center)
         screen.blit(close_text, close_text_rect)
 
-        # check for button click
         mouse_pos = pg.mouse.get_pos()
-        if close_rect.collidepoint(mouse_pos) and pg.mouse.get_pressed()[0]:
+        if close_rect.collidepoint(mouse_pos) and pg.mouse.get_pressed()[0]: # check for button click
             self.show_leaderboard = False
 
     def get_leaderboard_scores(self):
-        """get the leaderboard scores from file or create empty if not exists"""
-        leaderboard_file = "assets/leaderboard.json"
+        """get the leaderboard scores from file or create empty if does not exist"""
+        leaderboard_file = "../data/leaderboard.json"
         try:
-            # ensure directory exists
-            os.makedirs(os.path.dirname(leaderboard_file), exist_ok=True)
+            os.makedirs(os.path.dirname(leaderboard_file), exist_ok=True) # ensure directory exists | also done in main.py
 
             if os.path.exists(leaderboard_file):
                 with open(leaderboard_file, 'r') as file:
-                    return json.load(file)["leaderboard"]
+                    data = json.load(file)
+                    if "scores" in data:
+                        return data["scores"]
+                    elif "leaderboard" in data:
+                        return data["leaderboard"]
+                    else:
+                        return []
             else:
-                # create default leaderboard
-                default_leaderboard = {"leaderboard": []}
+                # create default leaderboard with scores key to match score_system.py
+                default_leaderboard = {"scores": []}
                 with open(leaderboard_file, 'w') as file:
                     json.dump(default_leaderboard, file)
                 return []
@@ -418,7 +379,7 @@ class Game:
             return []
 
     def restart_game(self):
-        """reset the game state -> a new game"""
+        """reset the game state -> new game"""
         self.game_active = True
         self.game_paused = False
         self.pipe_manager.reset()
