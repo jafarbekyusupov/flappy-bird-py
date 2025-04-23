@@ -4,7 +4,7 @@ class LeaderboardButton:
     def __init__(self, settings):
         self.settings = settings
 
-        # btn dimensions
+        # button dimensions
         self.button_width = int(150 * settings.scale_factor)
         self.button_height = int(40 * settings.scale_factor)
         self.button_x = 20
@@ -19,17 +19,16 @@ class LeaderboardButton:
         self.font = pg.font.SysFont('Arial', int(20 * settings.scale_factor))
 
     def resize(self, settings):
-        """upd w h when screen size alt"""
+        """update width & height when Screen Size changes"""
         self.settings = settings
         self.button_width = int(150 * settings.scale_factor)
         self.button_height = int(40 * settings.scale_factor)
         self.font = pg.font.SysFont('Arial', int(20 * settings.scale_factor))
 
     def draw_button(self, screen):
-        """LDB btn  & handle clicks"""
+        """leaderboard button  & handle clicks"""
         action = False
 
-        # mouse pos
         mouse_pos = pg.mouse.get_pos()
         button_rect = pg.Rect(self.button_x, self.button_y, self.button_width, self.button_height)
 
@@ -46,10 +45,9 @@ class LeaderboardButton:
         else:
             pg.draw.rect(screen, self.normal_color, button_rect, border_radius=10)
 
-        # Add border to button
-        pg.draw.rect(screen, (255, 255, 255), button_rect, width=2, border_radius=10)
-
-        # Draw button text
+        # ---------- LEADERBOARD BUTTON ---------- #
+        pg.draw.rect(screen, (255, 255, 255), button_rect, width=2, border_radius=10) # circular border for Leaderboard button
+        
         text = self.font.render("Leaderboard", True, (255, 255, 255))
         text_rect = text.get_rect(center=button_rect.center)
         screen.blit(text, text_rect)
