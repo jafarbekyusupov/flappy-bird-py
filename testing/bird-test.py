@@ -14,6 +14,8 @@ from score_system import ScoreSystem
 
 pg.init()
 
+
+
 class TestSettings(unittest.TestCase):
     # test settings stuff
     def setUp(self):
