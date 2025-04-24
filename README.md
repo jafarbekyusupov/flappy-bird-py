@@ -63,7 +63,7 @@ flappy-bird/
 │ ├── leaderboard.py‎‎             # LeaderboardButton button for Main Menu Screen to view leaderboard
 │ 
 ├── testing/                 
-│ ├── unit-tst.py                # Unit testing
+│ ├── bird-test.py               # Unit testing for Bird object from code/Bird.py
 │‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎                                                
 ├── assets/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  # Game assets folder                                                                                                                                                
 │ ├── img/‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎     # Image assets                                                              
