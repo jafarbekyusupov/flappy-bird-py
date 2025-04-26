@@ -35,7 +35,7 @@
 
 ---
 
-## 🎥 [Gameplay Video (YouTube)](https://youtube.com/shorts/EqGxaboTEXA)
+## 🎥 [Gameplay Video (YouTube)](https://youtube.com/shorts/bFRbRM-ebN0)
 
 ### Watch the full demo on YouTube
 
