@@ -2,6 +2,8 @@
 
 #### A Python implementation of the classic Flappy Bird game **using Pygame**
 
+> #### [View the full project overview with UML Diagrams and detailed explanations by Cognition here](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
+
 ## **🚀 Features**
 
 _• Smooth animations and physics (Bird wing movements using sprites)_
