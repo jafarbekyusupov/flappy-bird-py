@@ -8,6 +8,8 @@
 
 ## 🎥 [Gameplay Video](https://youtube.com/shorts/bFRbRM-ebN0)
 
+[![Flappy Bird Demo](https://i.ytimg.com/vi/bFRbRM-ebN0/sddefault.jpg)](https://youtube.com/shorts/bFRbRM-ebN0)
+
 ### [→ Watch the full demo on YouTube](https://youtube.com/shorts/bFRbRM-ebN0)
 
 ---
