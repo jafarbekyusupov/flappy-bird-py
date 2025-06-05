@@ -4,6 +4,14 @@
 
 > #### [View the full project overview with UML Diagrams and detailed explanations by Cognition here](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
 
+---
+
+## 🎥 [Gameplay Video](https://youtube.com/shorts/bFRbRM-ebN0)
+
+### [→ Watch the full demo on YouTube](https://youtube.com/shorts/bFRbRM-ebN0)
+
+---
+
 ## **🚀 Features**
 
 _• Smooth animations and physics (Bird wing movements using sprites)_
