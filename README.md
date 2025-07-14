@@ -2,6 +2,7 @@
 
 #### A Python implementation of the classic Flappy Bird game **using Pygame**
 
+> [!TIP]
 > #### [View the full project overview with UML Diagrams and detailed explanations by Cognition here](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
 
 ---
