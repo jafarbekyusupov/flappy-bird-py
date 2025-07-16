@@ -3,7 +3,8 @@
 #### A Python implementation of the classic Flappy Bird game **using Pygame**
 
 > [!TIP]
-> #### [View the full project overview with UML Diagrams and detailed explanations by Cognition here](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
+> #### [Detailed Project Overview & Analysis](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
+> Explore the complete project overview, including UML Diagrams and in-depth explanations, provided by **Cognition** [here.](https://deepwiki.com/jafarbekyusupov/flappy-bird-py)
 
 ---
 
